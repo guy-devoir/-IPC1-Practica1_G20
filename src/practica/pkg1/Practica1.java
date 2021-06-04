@@ -117,14 +117,17 @@ public class Practica1 {
                         System.out.println("==================");
                         break;
                     case 7:
+                        int[][] inversa;
+                        System.err.print("Nombre de la Matriz:");
+                        inversa = switch_m();
                         try{
-                        R = Inversa();
+                        R = Inversa(inversa);
                         }catch(Exception e){
                          System.out.println("Las matriz no es cuadrada");
                         }
-                        
-                        System.out.println("Inversa:");
+                        System.out.println("^^Inversa^^");
                         imprimir_m(R);
+                        System.err.println("==================");
                         break;
                     case 8:
                         break;
@@ -355,12 +358,8 @@ public class Practica1 {
     crearlos en los métodos, al fin y al cabo, el metodo que se invoca no es afectado 
     por ello
     */
-    private static int[][] Inversa() throws Exception {
-        int[][] aux;
+    private static int[][] Inversa(int[][] aux) throws Exception {
         int[][] inv;
-        System.err.print("Nombre de la Matriz:");
-        aux = switch_m();
-        
         if (aux[0].length == aux.length) {
             int det;
             det = Det(aux);
@@ -368,9 +367,11 @@ public class Practica1 {
             int[][] adj;
             trans = Traspuesta(aux);
             adj = Adjunta(trans);
-            System.out.println(det);
+            /*System.out.println(det);
             imprimir_m(trans);
             imprimir_m(adj);
+            Está parte solo era para garantizar que todo estuviera en orden
+            */
             inv = new int[adj.length][adj[0].length];
             for (int i = 0; i < adj.length; i++) {
                 for (int j = 0; j < adj[0].length; j++) {
