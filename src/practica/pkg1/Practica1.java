@@ -37,6 +37,7 @@ public class Practica1 {
     static int[][] Y; //24
     static int[][] Z; //25
     
+
     //Decidí volver el escaner global, espero que no sea una mala idea
     //Los metodos que lo utilizaban de local eran switch_m, sub_menu y main
     static Scanner sc = new Scanner(System.in);
@@ -93,7 +94,7 @@ public class Practica1 {
                         //int[][] resultado_resta;
                         try {
                             R = resta_m(m11, m21);
-                            System.out.println("Resultado de la suma es:");
+                            System.out.println("Resultado de la resta es:");
                             imprimir_m(R);
                             System.out.println("=================="); 
                         } catch (Exception e) {
@@ -107,22 +108,37 @@ public class Practica1 {
                     case 5:
                         break;
                     case 6:
-                        R = Traspuesta();
+                        int[][] original;
+                        System.out.println("Nombre de la Matriz:");
+                        original = switch_m();
+                        R = Traspuesta(original);
                         System.out.println("Transpuesta:");
                         imprimir_m(R);
                         System.out.println("==================");
                         break;
                     case 7:
+                        try{
+                        R = Inversa();
+                        }catch(Exception e){
+                         System.out.println("Las matriz no es cuadrada");
+                        }
+                        
+                        System.out.println("Inversa:");
+                        imprimir_m(R);
                         break;
                     case 8:
                         break;
                     case 9:
                         //Aquí no se puedeo usar la matriz 'R' por que la 
                         //determinate es un entero
+                        int[][] m19;
+                        System.err.print("Nombre de la Matriz:");
+                        m19 = switch_m();
                         int determinante;
                         try {
-                            determinante = Det();
+                            determinante = Det(m19);
                             System.err.print("LA DETERMINANTE ES:" +"[ " + determinante + "]");
+                            System.out.println("==================");
                         } catch (Exception e) {
                             System.out.println("La dimensiones de la matriz exceden 3x3");
                         }
@@ -296,11 +312,8 @@ public class Practica1 {
         return aux;
     }
 
-    private static int[][] Traspuesta() {
+    private static int[][] Traspuesta(int[][] original) {
         int[][] aux;//El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
-        int[][] original;
-        System.out.println("Nombre de la Matriz:");
-        original = switch_m();
         aux = new int[original[0].length][original.length];
         for (int i = 0; i < original.length; i++) {
             for (int j = 0; j < original[0].length; j++) {
@@ -313,24 +326,21 @@ public class Practica1 {
         return aux;
     }
 
-    private static int Det() throws Exception {
+    private static int Det(int[][] m19) throws Exception {
     int aux_det = 0;
-    int[][] m1;
-    System.err.print("Nombre de la Matriz:");
-    m1 = switch_m();
     System.err.println("DE LA MATRIZ");
-    imprimir_m(m1);
-        if(m1.length == m1[0].length){
-            if (m1.length == 2) {
+    imprimir_m(m19);
+        if(m19.length == m19[0].length){
+            if (m19.length == 2) {
                 //Funciona
-                aux_det = m1[0][0] * m1[1][1] - m1[0][1] * m1[1][0];
+                aux_det = m19[0][0] * m19[1][1] - m19[0][1] * m19[1][0];
             }
-            if (m1.length == 3) {
-                int left = m1[0][0] * m1[1][1] * m1[2][2] - m1[1][0] * m1[2][1] * m1[0][2] + m1[2][0] * m1[0][1] * m1[1][2];
-                int right = m1[0][2] * m1[1][1] * m1[2][0] - m1[1][2] * m1[2][1] * m1[0][0] + m1[2][2] * m1[0][1] * m1[1][0];
+            if (m19.length == 3) {
+                int left = m19[0][0] * m19[1][1] * m19[2][2] - m19[1][0] * m19[2][1] * m19[0][2] + m19[2][0] * m19[0][1] * m19[1][2];
+                int right = m19[0][2] * m19[1][1] * m19[2][0] - m19[1][2] * m19[2][1] * m19[0][0] + m19[2][2] * m19[0][1] * m19[1][0];
                 aux_det = left - right;
             }
-            if (m1.length > 3) {
+            if (m19.length > 3) {
                 throw new Exception();
             }
         } else {
@@ -345,4 +355,63 @@ public class Practica1 {
     crearlos en los métodos, al fin y al cabo, el metodo que se invoca no es afectado 
     por ello
     */
+    private static int[][] Inversa() throws Exception {
+        int[][] aux;
+        int[][] inv;
+        System.err.print("Nombre de la Matriz:");
+        aux = switch_m();
+        
+        if (aux[0].length == aux.length) {
+            int det;
+            det = Det(aux);
+            int[][] trans;
+            int[][] adj;
+            trans = Traspuesta(aux);
+            adj = Adjunta(trans);
+            System.out.println(det);
+            imprimir_m(trans);
+            imprimir_m(adj);
+            inv = new int[adj.length][adj[0].length];
+            for (int i = 0; i < adj.length; i++) {
+                for (int j = 0; j < adj[0].length; j++) {
+                    inv[i][j]= adj[i][j]/det;
+                }
+            }
+        } else {
+            throw new Exception();
+        }
+
+        return inv;
+
+    }
+
+    static int[][] Adjunta(int[][] adj) throws Exception {
+        int[][] aux;
+        aux = new int[adj.length][adj[0].length];
+        if (adj.length == 2) {
+            //int tl = adj[1][1];
+            //int br = adj[0][0];
+            aux[0][0] = adj[1][1];
+            aux[1][1] = adj[0][0];
+            aux[0][1] = -adj[0][1];
+            aux[1][0] = -adj[1][0];
+        }
+        if (adj.length == 3) {
+            aux[0][0] = adj[1][1] * adj[2][2] - adj[1][2] * adj[2][1];
+            aux[0][1] = - adj[1][0] * adj[2][2] + adj[1][2] * adj[2][0];
+            aux[0][2] = adj[1][0] * adj[2][1] - adj[1][1] * adj[2][0];
+            aux[1][0] = - adj[0][1] * adj[2][2] + adj[0][2] * adj[2][1];
+            aux[1][1] =  adj[0][0] * adj[2][2] - adj[0][2] * adj[2][0];
+            aux[1][2] = - adj[0][0] * adj[2][1] + adj[0][1] * adj[2][0];
+            aux[2][0] = adj[0][1] * adj[1][2] - adj[0][2] * adj[1][1];
+            aux[2][1] = - adj[0][0] * adj[1][2] + adj[0][2] * adj[1][0];
+            aux[2][2] = adj[0][0] * adj[1][1] - adj[0][1] * adj[1][0];
+        }
+        if (adj.length > 3){
+         throw new Exception();
+        }
+
+        return aux;
+
+    }
 }
