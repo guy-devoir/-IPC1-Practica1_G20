@@ -224,21 +224,20 @@ public class Practica1 {
     }
 
     //Producto de dos matrices (Sin acabar)
-    static int[][] producto_m(int[][] m1, int[][] m2) throws Exception {
-        int[][] aux = null;
-        if (m1.length == m2[0].length) {
-            for (int k = 0; k < m1.length; k++) {
-                for (int i = 0; i < m2[0].length; i++) {
-                    for (int j = 0; j < m1[0].length; j++) {
-                        aux[k][i] += m1[i][j] * m2[j][k];
+    public static boolean multiplicacionmatriz(int[][] m1, int[][] m2, int[][] m3){
+        boolean compatible=true;
+        if (m1[0].length != m2.length){
+            compatible = false;
+        }else{
+            for (int i=0;i<m1.length;i++){
+                for (int j=0; j < m2[i].length; j++) {
+                    for (int k=0;k<m2.length;k++){
+                        m3[i][j]+=m1[i][k]*m2[k][j];
                     }
                 }
             }
-        } else {
-            throw new Exception();
         }
-
-        return aux;
+        return compatible;
     }
 
     //Debo encontrar una solución más elegante para este proceso
