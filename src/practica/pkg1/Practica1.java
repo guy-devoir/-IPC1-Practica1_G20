@@ -11,10 +11,10 @@ public class Practica1 {
       el uso que se le da en el metodo switch_m
       el cual por cierto es muy primitivo y propiamente de principiantes
      */
-    static int[][] A={{2,2},{2,2}}; //1
+    static int[][] A={{1,2},{3,4}}; //1
     static int[][] B={{2,2},{2,2}}; //2
     static int[][] C ={{1,2,3},{4,5,6},{7,8,9},{10,11,12}}; //3
-    static int[][] D; //4
+    static int[][] D ={{-2,4,5},{6,7,-3},{3,0,2}}; //4
     static int[][] E; //5
     static int[][] F; //6
     static int[][] G; //7
@@ -48,11 +48,21 @@ public class Practica1 {
     un switch y una variable string para para.
      */
     public static void main(String[] args) {
-        Boolean menu = true;
-        
+        Boolean menu = true;   
         //Memu principal
         while (menu = true) {
-            System.out.println("***Menu Principal***" + "\n1)Cargar Matrices" + "\n2)Suma de matrices" + "\n3)Resta de matrices" + "\n4)Multiplicación" + "\n5)División" + "\n6)Transpuesta de una matriz");
+            System.out.println("***Menu Principal***"
+                                + "\n1)Cargar Matrices"
+                                + "\n2)Suma de matrices"
+                                + "\n3)Resta de matrices"
+                                + "\n4)Multiplicación"
+                                + "\n5)División"
+                                + "\n6)Transpuesta de una matriz"
+                                + "\n7)Matriz inversa"
+                                + "\n8)Potencia de una matriz" 
+                                + "\n9)Determinante"
+                                + "\n10)Reportes"
+                                + "\n11)Salir");
             try {
                 int opcion;
                 switch (opcion = sc.nextInt()) {
@@ -107,6 +117,16 @@ public class Practica1 {
                     case 8:
                         break;
                     case 9:
+                        //Aquí no se puedeo usar la matriz 'R' por que la 
+                        //determinate es un entero
+                        int determinante;
+                        try {
+                            determinante = Det();
+                            System.err.print("LA DETERMINANTE ES:" +"[ " + determinante + "]");
+                        } catch (Exception e) {
+                            System.out.println("La dimensiones de la matriz exceden 3x3");
+                        }
+                        
                         break;
                     case 10:
                         break;
@@ -279,18 +299,46 @@ public class Practica1 {
     private static int[][] Traspuesta() {
         int[][] aux;//El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
         int[][] original;
+        System.out.println("Nombre de la Matriz:");
         original = switch_m();
-        aux = new int[original[0].length][original.length]; 
-        for(int i = 0; i < original.length; i++) {
+        aux = new int[original[0].length][original.length];
+        for (int i = 0; i < original.length; i++) {
             for (int j = 0; j < original[0].length; j++) {
-                aux[j][i]=original[i][j];
+                aux[j][i] = original[i][j];
             }
         }
         System.err.println("Matriz original:");
         imprimir_m(original);
         System.err.println("==================");
-        return aux;  
+        return aux;
     }
+
+    private static int Det() throws Exception {
+    int aux_det = 0;
+    int[][] m1;
+    System.err.print("Nombre de la Matriz:");
+    m1 = switch_m();
+    System.err.println("DE LA MATRIZ");
+    imprimir_m(m1);
+        if(m1.length == m1[0].length){
+            if (m1.length == 2) {
+                //Funciona
+                aux_det = m1[0][0] * m1[1][1] - m1[0][1] * m1[1][0];
+            }
+            if (m1.length == 3) {
+                int left = m1[0][0] * m1[1][1] * m1[2][2] - m1[1][0] * m1[2][1] * m1[0][2] + m1[2][0] * m1[0][1] * m1[1][2];
+                int right = m1[0][2] * m1[1][1] * m1[2][0] - m1[1][2] * m1[2][1] * m1[0][0] + m1[2][2] * m1[0][1] * m1[1][0];
+                aux_det = left - right;
+            }
+            if (m1.length > 3) {
+                throw new Exception();
+            }
+        } else {
+            throw new Exception();
+        }
+        return aux_det;
+    }
+
     /*
     La forma en que use los arreglos auxiliares con nomenclatura m1,m2,m11, m22, etc
     ha cambiado a lo largo del codigo, al principio estaban en "Main", pero es mejor 
