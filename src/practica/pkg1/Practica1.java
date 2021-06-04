@@ -183,14 +183,24 @@ public class Practica1 {
                         int[][] m1 = switch_m();
                         System.out.println("Nombre de la segunda matriz:");
                         int[][] m2 = switch_m();
-                        try{
-                        R = producto_m(m1, m2);
-                        imprimir_m(R);
-                        System.out.println("==================");
-                        }catch(Exception e){
-                            System.out.println("...Introduzca una entrada valida");
-                            System.out.println("(╯°□°)╯︵ ┻━┻");
+
+                        /* Numero de Filas de la primera Matriz */
+                        int filas = m1.length;
+                        /* Numero de Columnas de la segunda Matriz */
+                        int columnas = m2[0].length;
+
+                        int[][] m3 = new int[filas][columnas];
+
+                        /*Evaluacion de las dos matrices de lectura*/
+                        if(multiplicacionmatriz(m1,m2,m3)){
+                            mostrarmatriz(m3);
+
+                        }else{
+                            /*Si no se cumple con la condicion
+                             */
+                            System.out.println("Matrices no compatibles");
                         }
+
                         break;
                     case 3:
                         System.exit(0);
@@ -238,6 +248,16 @@ public class Practica1 {
             }
         }
         return compatible;
+    }
+    //Muestreo de la multiplicacion de 2 matrices
+    public static void mostrarmatriz(int[][] m){
+        System.out.println("La matriz resultante es: ");
+        for (int i=0; i<m.length;i++){
+            for (int j=0;j<m[i].length;j++){
+                System.out.print(m[i][j]+" ");
+            }
+            System.out.println();
+        }
     }
 
     //Debo encontrar una solución más elegante para este proceso
