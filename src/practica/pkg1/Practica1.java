@@ -1,6 +1,7 @@
 package practica.pkg1;
 
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * @author Luciano Xiquín
@@ -11,10 +12,10 @@ public class Practica1 {
       el uso que se le da en el metodo switch_m
       el cual por cierto es muy primitivo y propiamente de principiantes
      */
-    static int[][] A={{1,2},{3,4}}; //1
-    static int[][] B={{2,2},{2,2}}; //2
-    static int[][] C ={{1,2,3},{4,5,6},{7,8,9},{10,11,12}}; //3
-    static int[][] D ={{-2,4,5},{6,7,-3},{3,0,2}}; //4
+    static int[][] A; //1
+    static int[][] B; //2
+    static int[][] C; //3
+    static int[][] D; //4
     static int[][] E; //5
     static int[][] F; //6
     static int[][] G; //7
@@ -41,7 +42,7 @@ public class Practica1 {
     //Decidí volver el escaner global, espero que no sea una mala idea
     //Los metodos que lo utilizaban de local eran switch_m, sub_menu y main
     static Scanner sc = new Scanner(System.in);
-    static int[][] R;
+    static int[][] R; // 26
     /*
     Este sí que sera un 'espaguetti code', la vdd
     Metodos como switch_m son redundantes y bastante tediosos de programar,
@@ -69,7 +70,7 @@ public class Practica1 {
                 switch (opcion = sc.nextInt()) {
                     case 1:
                         System.out.println("****************" + "\nIntroduzca la ruta del archivo");
-                        leerarchivo();
+                        leerArchivo();
                         break;
                     case 2:
                         System.out.println("Nombre de la primer matriz:");
@@ -162,8 +163,147 @@ public class Practica1 {
     }
 
     //Sin empezar
-    private static void leerarchivo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private static void leerArchivo() {
+
+        //variables auxiliar para la lectura del archivo
+        String nombreMatriz;
+        String[] contenidoFila;
+        String[] filaMatriz;
+        String[] columnasMatriz;
+        int[][] matrixAux = null;
+
+        try {
+
+            File archivo = new File(sc.nextLine());
+            String linea = "";
+            sc.nextLine();//Escanea la primera linea de mi archivo
+
+            while(sc.hasNextLine()){
+
+                linea += sc.hasNextLine() + "\n";
+
+            }
+
+            //Aquí empieza el algoritmo para saber el nombre de mi matriz y llenar la matriz correspondiente
+            for (int i = 0; i < 26; i++) {
+
+                contenidoFila = linea.split(":");
+                nombreMatriz = contenidoFila[0].trim();
+                //separamos el contenido del nombre
+                filaMatriz = contenidoFila[1].split(";"); //Aquí ya tenemos las filas de mi matriz
+                for (int j = 0; j < filaMatriz.length; j++) {
+
+                    columnasMatriz = filaMatriz[j].split(",");
+
+                    matrixAux = new int[filaMatriz.length][columnasMatriz.length];
+
+                        for (int k = 0; k < columnasMatriz.length; k++) {
+
+                            if(filaMatriz[0].length() == filaMatriz[j].length()){
+
+                                matrixAux[j][k] = Integer.parseInt(columnasMatriz[k]);
+
+                            }
+                            else{
+                                System.out.println("Se omitio la matriz");
+                                i-=1;
+                                break;
+                            }
+
+                        }
+
+                }
+
+                //Ya que tenemos la matriz cargada y pasando las excepciones la guardamos en su respectivo lugar
+                if(nombreMatriz.equals("A") && matrixAux != null){
+                    A = matrixAux;
+                }
+                if(nombreMatriz.equals("B") && matrixAux != null){
+                    B = matrixAux;
+                }
+                if(nombreMatriz.equals("C") && matrixAux != null){
+                    C = matrixAux;
+                }
+                if(nombreMatriz.equals("D") && matrixAux != null){
+                    D = matrixAux;
+                }
+                if(nombreMatriz.equals("E") && matrixAux != null){
+                    E = matrixAux;
+                }
+                if(nombreMatriz.equals("F") && matrixAux != null){
+                    F = matrixAux;
+                }
+                if(nombreMatriz.equals("G") && matrixAux != null){
+                    G = matrixAux;
+                }
+                if(nombreMatriz.equals("H") && matrixAux != null){
+                    H = matrixAux;
+                }
+                if(nombreMatriz.equals("I") && matrixAux != null){
+                    I = matrixAux;
+                }
+                if(nombreMatriz.equals("J") && matrixAux != null){
+                    J =  matrixAux;
+                }
+                if(nombreMatriz.equals("K") && matrixAux != null){
+                    K = matrixAux;
+                }
+                if(nombreMatriz.equals("L") && matrixAux != null){
+                    L = matrixAux;
+                }
+                if(nombreMatriz.equals("M") && matrixAux != null){
+                    M = matrixAux;
+                }
+                if(nombreMatriz.equals("N") && matrixAux != null){
+                    N = matrixAux;
+                }
+                if(nombreMatriz.equals("O") && matrixAux != null){
+                    O = matrixAux;
+                }
+                if(nombreMatriz.equals("P") && matrixAux != null){
+                    P = matrixAux;
+                }
+                if(nombreMatriz.equals("Q") && matrixAux != null){
+                    Q = matrixAux;
+                }
+                if(nombreMatriz.equals("S") && matrixAux != null){
+                    S = matrixAux;
+                }
+                if(nombreMatriz.equals("T") && matrixAux != null){
+                    T = matrixAux;
+                }
+                if(nombreMatriz.equals("U") && matrixAux != null){
+                    U = matrixAux;
+                }
+                if(nombreMatriz.equals("V") && matrixAux != null){
+                    V = matrixAux;
+                }
+                if(nombreMatriz.equals("W") && matrixAux != null){
+                    W = matrixAux;
+                }
+                if(nombreMatriz.equals("X")){
+                    X = matrixAux;
+                }
+                if(nombreMatriz.equals("Y")){
+                    Y = matrixAux;
+                }
+                if(nombreMatriz.equals("Z")){
+                    Z = matrixAux;
+                }
+                if(nombreMatriz.equals("R") && matrixAux != null){
+                    R = matrixAux;
+                }
+
+            }
+
+            sc.close();
+
+        }
+        catch (Exception e){
+            System.out.println("No se pudo leer el archivo");
+            System.out.println(e.getLocalizedMessage());
+        }
+
     }
 
     //No comment
