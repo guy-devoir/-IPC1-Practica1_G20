@@ -106,8 +106,12 @@ public class Practica1 {
                     case 4:
                         sub_menu();
                         break;
-                    case 5:
+                    case 5: 
+                       try{
                         division();
+                        }catch(Exception e){
+                        System.out.println("La división no es posible");
+                        }
                         break;
                     case 6:
                         int[][] original;
@@ -247,7 +251,7 @@ public class Practica1 {
         }
     }
 
-    //Sin empezar
+    //Terminado
     private static void leerArchivo() {
 
         //variables auxiliar para la lectura del archivo
@@ -497,7 +501,7 @@ public class Practica1 {
         return res_aux;
     }
 
-    //Producto de dos matrices (Sin acabar)
+    //Producto de dos matrices
     public static boolean multiplicacionmatriz(int[][] m1, int[][] m2, int[][] m3){
         boolean compatible=true;
         if (m1[0].length != m2.length){
@@ -660,17 +664,21 @@ public class Practica1 {
 
     }
 
-    public static void division(){
-        System.out.printl("Primera matriz: ");
+    public static void division() throws Exception {
+        System.out.println("Primera matriz: ");
         int[][] m1 = switch_m();
         System.out.println("Segunda matriz: ");
-        int[][] m2 =switch_m();
+        int[][] m2 = switch_m();
+        try {
+            int[][] inversa = Inversa(m2);
+            int[][] m4 = new int[m1.length][m2[0].length];
 
-        int[][] inversa = Inversa(m2);
-        int[][] m4 = mew int[m1.length][m2[0].length];
-
-        if(multiplicacionmatriz(m1, inversa, m4)){
-            imprimir_m(m4);
+            if (multiplicacionmatriz(m1, inversa, m4)) {
+                imprimir_m(m4);
+            }
+        } catch (Exception e) {
+            System.out.println("Las matrices no son iguales en dimensiones");
         }
+
     }
 }
