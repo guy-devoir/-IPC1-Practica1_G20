@@ -107,6 +107,7 @@ public class Practica1 {
                         sub_menu();
                         break;
                     case 5:
+                        division();
                         break;
                     case 6:
                         int[][] original;
@@ -657,5 +658,19 @@ public class Practica1 {
 
         return aux;
 
+    }
+
+    public static void division(){
+        System.out.printl("Primera matriz: ");
+        int[][] m1 = switch_m();
+        System.out.println("Segunda matriz: ");
+        int[][] m2 =switch_m();
+
+        int[][] inversa = Inversa(m2);
+        int[][] m4 = mew int[m1.length][m2[0].length];
+
+        if(multiplicacionmatriz(m1, inversa, m4)){
+            imprimir_m(m4);
+        }
     }
 }
