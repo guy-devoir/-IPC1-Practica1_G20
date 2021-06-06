@@ -131,6 +131,89 @@ public class Practica1 {
                         System.err.println("==================");
                         break;
                     case 8:
+
+                        Scanner entrada = new Scanner(System.in);
+                        int[][] m1 = {
+                                {1, 1},
+                                {1, 1}
+                        };
+
+
+                        try{
+                            System.out.println("Ingresar la potencia de elevacion de la matriz");
+                            int potencia = entrada.nextInt();
+
+                            if (potencia > 0){
+                                //Inicializacion unica del valalor m2=m1 para que la vuelta 2 del ciclo m2 se matenga estatica con la ayuda de valor auxiliar
+                                int filas = m1.length;
+                                int columnas = m1[0].length;
+                                int[][] aux = new int[m1.length][m1[0].length];
+                                if (filas == columnas){
+                                    int[][] m2 = new int[filas][columnas];
+                                    for (int i = 0; i < m1.length; i++) {
+                                        for (int j = 0; j < m1[0].length; j++) {
+                                            m2[i][j] = m1[i][j];
+                                        }
+                                    }
+                                    if (potencia>1){
+                                        //Inicio de procedimiento de potenciacion
+                                        for (int b=1;b<=potencia-1;b++) {
+                                            // Utilizando una arrreglo llamado aux para mantener el valor anterior de m2
+                                            for (int i = 0; i < m1.length; i++) {
+                                                for (int j = 0; j < m1[0].length; j++) {
+                                                    aux[i][j]=m2[i][j];
+                                                }
+                                            }
+                                            //Lugar en donde se almacena el resultado
+                                            int[][] producto = new int[m1.length][m2[0].length];
+                                            // Realizamos esto por cada columna de la  matriz m2
+                                            for (int a = 0; a < m2[0].length; a++) {
+                                                // Dentro recorremos las filas de la matriz m1
+                                                for (int i = 0; i < m1.length; i++) {
+                                                    int suma = 0;
+                                                    // cada columna de la matriz m1
+                                                    for (int j = 0; j < m1[0].length; j++) {
+                                                        // Multiplicamos y sumamos resultado
+                                                        suma += m1[i][j] * m2[j][a];
+                                                    }
+                                                    // Se llena dentro de la matriz producto dentro del producto
+                                                    producto[i][a] = suma;
+                                                }
+                                            }
+                                            // Mostrando producto de la multipliacion
+                                            int c=b+1;
+                                            System.out.print("Imprimiendo matriz elevado a la "+c+"\n");
+                                            for (int i = 0; i < m2.length; i++) {
+                                                System.out.print("[");
+                                                for (int j = 0; j < m2[0].length; j++) {
+                                                    System.out.print("  "+producto[i][j]);
+                                                    m2[i][j]= aux[i][j];
+                                                    m1[i][j] = producto[i][j];
+                                                }
+                                                System.out.print(" ] \n");
+                                            }
+                                        }
+                                    }else{
+                                        // Impresion de matriz elevado a la 1
+                                        System.out.print("Imprimiendo Matriz elevado a la 1\n");
+                                        for (int i = 0; i < m2.length; i++) {
+                                            System.out.print("[");
+                                            for (int j = 0; j < m2[0].length; j++) {
+                                                System.out.print(" "+m1[i][j]);
+                                            }
+                                            System.out.print(" ] \n");
+                                        }
+                                    }
+                                }else{
+                                    System.out.println("No se puede realizar el prodemiento de elevacion de potencias para esta matriz");
+                                    System.out.println("Para que pueda realizarse la matriz seleccionada");
+                                }
+                            }else{
+                                System.out.println("El valor numerico ingresado para la elevacion debera de ser positivo, mayor que 0");
+                            }
+                        }catch (Exception e){
+                            System.out.println("Debes de ingresar un numero entero para realizar la potencia de la matriz seleccionada");
+                        }
                         break;
                     case 9:
                         //Aquí no se puedeo usar la matriz 'R' por que la 
@@ -146,7 +229,8 @@ public class Practica1 {
                         } catch (Exception e) {
                             System.out.println("La dimensiones de la matriz exceden 3x3");
                         }
-                        
+
+
                         break;
                     case 10:
                         break;
