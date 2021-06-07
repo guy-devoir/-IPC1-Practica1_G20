@@ -1,5 +1,7 @@
 package practica.pkg1;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.File;
 
@@ -49,6 +51,10 @@ public class Practica1 {
     sin embargo al no haber forma (hasta donde yo se) de usar un Scanner, 
     un switch y una variable string para para.
      */
+
+    //variable auxiliar para reportes
+    static String operacion = "";
+
     public static void main(String[] args) {
         Boolean menu = true;   
         //Memu principal
@@ -63,8 +69,7 @@ public class Practica1 {
                                 + "\n7)Matriz inversa"
                                 + "\n8)Potencia de una matriz" 
                                 + "\n9)Determinante"
-                                + "\n10)Reportes"
-                                + "\n11)Salir");
+                                + "\n10)Salir");
             try {
                 int opcion;
                 switch (opcion = sc.nextInt()) {
@@ -83,6 +88,8 @@ public class Practica1 {
                             System.out.println("Resultado de la suma es:");
                             imprimir_m(R);
                             System.out.println("==================");
+                            operacion = "Suma";
+                            reporte(m10, m20);
                         } catch (Exception e) {
                             System.out.println("Las matrices no son iguales");
                         }
@@ -97,7 +104,9 @@ public class Practica1 {
                             R = resta_m(m11, m21);
                             System.out.println("Resultado de la resta es:");
                             imprimir_m(R);
-                            System.out.println("=================="); 
+                            System.out.println("==================");
+                            operacion = "Resta";
+                            reporte(m11, m21);
                         } catch (Exception e) {
                             System.out.println("Las matrices no son iguales");
                         }
@@ -118,6 +127,7 @@ public class Practica1 {
                         System.out.println("Nombre de la Matriz:");
                         original = switch_m();
                         R = Traspuesta(original);
+                        reporteTranspuesta();
                         System.out.println("Transpuesta:");
                         imprimir_m(R);
                         System.out.println("==================");
@@ -128,6 +138,8 @@ public class Practica1 {
                         inversa = switch_m();
                         try{
                         R = Inversa(inversa);
+                        operacion = "Inversa";
+                        reporteInversa(inversa);
                         }catch(Exception e){
                          System.out.println("Las matriz no es cuadrada");
                         }
@@ -198,6 +210,7 @@ public class Practica1 {
                                                 System.out.print(" ] \n");
                                             }
                                         }
+                                        reportePotencia(potencia);
                                     }else{
                                         // Impresion de matriz elevado a la 1
                                         System.out.print("Imprimiendo Matriz elevado a la 1\n");
@@ -208,6 +221,7 @@ public class Practica1 {
                                             }
                                             System.out.print(" ] \n");
                                         }
+                                        reportePotencia(potencia);
                                     }
                                 }else{
                                     System.out.println("No se puede realizar el prodemiento de elevacion de potencias para esta matriz");
@@ -231,6 +245,7 @@ public class Practica1 {
                             determinante = Det(m19);
                             System.err.print("LA DETERMINANTE ES:" +"[ " + determinante + "]");
                             System.out.println("==================");
+                            reporteDeterminante(determinante, m19);
                         } catch (Exception e) {
                             System.out.println("La dimensiones de la matriz exceden 3x3");
                         }
@@ -238,8 +253,6 @@ public class Practica1 {
 
                         break;
                     case 10:
-                        break;
-                    case 11:
                         System.exit(0);
                     default:
                         System.out.println("Seleccione una opción valida");
@@ -462,7 +475,7 @@ public class Practica1 {
                         /*Evaluacion de las dos matrices de lectura*/
                         if(multiplicacionmatriz(m1,m2,m3)){
                             mostrarmatriz(m3);
-
+                            reporte(m1, m2);
                         }else{
                             /*Si no se cumple con la condicion
                              */
@@ -498,6 +511,7 @@ public class Practica1 {
                 res_aux[i][j] = num * aux[i][j];
             }
         }
+        reporteMultiplicacionEscalar(num);
         return res_aux;
     }
 
@@ -676,9 +690,393 @@ public class Practica1 {
             if (multiplicacionmatriz(m1, inversa, m4)) {
                 imprimir_m(m4);
             }
+            reporte(m1, m2);
         } catch (Exception e) {
             System.out.println("Las matrices no son iguales en dimensiones");
         }
 
     }
+
+    //Los reportes se basan en el mismo sistema, sistema sencillo para escribir un archivo html
+    public static void reporte(int[][] uno, int[][] dos){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null && uno != null && dos != null){
+
+            try{
+
+                fichero = new FileWriter("Reporte"+operacion+".html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte"+operacion+"</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte"+ operacion +"</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matrices Operandos</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz uno
+
+                for (int i = 0; i < uno.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < uno[0].length; j++) {
+                        pw.println("<td>" + uno[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz dos
+
+                for (int i = 0; i < dos.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < dos[0].length; j++) {
+                        pw.println("<td>" + dos[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz R</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < R.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < R[0].length; j++) {
+                        pw.println("<td>" + R[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
+    public static void reporteMultiplicacionEscalar(int num){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null){
+
+            try{
+
+                fichero = new FileWriter("ReporteME.html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte Multiplicacion Escalar</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte Multiplicación por un Escalar</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz R</p>");
+
+                pw.println("<p style=\"text-align:center;\">Escalar: "+String.valueOf(num)+"</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < R.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < R[0].length; j++) {
+                        pw.println("<td>" + R[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
+    public static void reporteTranspuesta(){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null){
+
+            try{
+
+                fichero = new FileWriter("ReporteMT.html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte Transpuesta</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte Transpuesta</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz Transpuesta</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < R.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < R[0].length; j++) {
+                        pw.println("<td>" + R[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
+    public static void reporteInversa(int[][] uno){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null && uno != null){
+
+            try{
+
+                fichero = new FileWriter("Reporte"+operacion+".html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte Inversa</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte"+ operacion +"</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz Original</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz uno
+
+                for (int i = 0; i < uno.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < uno[0].length; j++) {
+                        pw.println("<td>" + uno[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz R</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < R.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < R[0].length; j++) {
+                        pw.println("<td>" + R[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
+    public static void reportePotencia(int num){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null){
+
+            try{
+
+                fichero = new FileWriter("ReportePM.html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte Potencia</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte Potencia de una Matriz</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz R</p>");
+
+                pw.println("<p style=\"text-align:center;\">Potencia: "+String.valueOf(num)+"</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < R.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < R[0].length; j++) {
+                        pw.println("<td>" + R[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
+    public static void reporteDeterminante(int det, int[][] matrix){
+
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+
+        if(R != null){
+
+            try{
+
+                fichero = new FileWriter("ReporteDeterminante.html");
+                pw = new PrintWriter(fichero);
+
+                pw.println("<!DOCTYPE html>\n"
+                        + "<htlm lang=\"es\">\n" +
+                        "<head>\n"
+                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\">\n"
+                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                        + "    <title>Reporte Determinante</title>\n"
+                        + "</head>\n"
+                        + "<body>\n");
+
+                pw.println("<h1 style=\"text-align:center;\">Reporte Determinante de una Matriz</h1>");
+
+                pw.println("<p style=\"text-align:center;\">Matriz</p>");
+
+                pw.println("<table border=\"1\" style=\"width:100%\">");//imprimimos la matriz resultado R
+
+                for (int i = 0; i < matrix.length; i++) { //imprimir las matrices
+                    pw.println("<tr>");
+                    for (int j = 0; j < matrix[0].length; j++) {
+                        pw.println("<td>" + matrix[i][j] + "</td>");
+                    }
+                    pw.println("</tr>");
+                }
+
+                pw.println("</table>");
+
+                pw.println("<p style=\"text-align:center;\">Determinante: "+ det +"</p>");
+
+                pw.println(" "
+                        + "    \n"
+                        + "</body>\n"
+                        + "</html>");
+
+                fichero.close();
+
+            }
+            catch (Exception e){
+                System.out.println("No se pudo generar el reporte");
+                System.out.println(e.getLocalizedMessage());
+                System.out.println(e.getCause());
+            }
+
+        }
+
+    }
+
 }
