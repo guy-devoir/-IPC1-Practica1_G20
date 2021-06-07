@@ -7,6 +7,10 @@ import java.io.File;
 
 /**
  * @author Luciano Xiquín
+ * @author 
+ * @author 
+ * @author
+ * 
  */
 public class Practica1 {
 
@@ -118,6 +122,7 @@ public class Practica1 {
                     case 5: 
                        try{
                         division();
+                        
                         }catch(Exception e){
                         System.out.println("La división no es posible");
                         }
@@ -249,8 +254,6 @@ public class Practica1 {
                         } catch (Exception e) {
                             System.out.println("La dimensiones de la matriz exceden 3x3");
                         }
-
-
                         break;
                     case 10:
                         System.exit(0);
@@ -549,18 +552,90 @@ public class Practica1 {
         int[][] aux = null;
         if (letter.equals("A")) {
             aux = A;
+            //1
         }
         if (letter.equals("B")) {
             aux = B;
+            //2
         }
         if (letter.equals("C")) {
-            aux = C;
+            aux = C; 
+            //3
         }
         if (letter.equals("D")) {
             aux = D;
+            //4
         }
         if (letter.equals("E")) {
             aux = E;
+            //5
+        }
+        if (letter.equals("F")) {
+            aux = F;
+            //6
+        }
+        if (letter.equals("G")) {
+            aux = G;
+            //7
+        }
+        if (letter.equals("H")) {
+            aux = H;
+            //8
+        }
+        if (letter.equals("I")) {
+            aux = I;
+            //9
+        }
+        if (letter.equals("J")) {
+            aux = J;//10
+        }
+        if (letter.equals("K")) {
+            aux = K;//11
+        }
+        if (letter.equals("L")) {
+            aux = L;//12
+        }
+        if (letter.equals("M")) {
+            aux = M;//13
+        }
+        if (letter.equals("N")) {
+            aux = N;//14
+        }
+        if (letter.equals("O")) {
+            aux = O;//15
+        }
+        if (letter.equals("P")) {
+            aux = P;//16
+        }
+        if (letter.equals("Q")) {
+            aux = Q;//17
+        }
+        if (letter.equals("R")) {
+            aux = R;//18
+        }
+        if (letter.equals("S")) {
+            aux = S;//19
+        }
+        if (letter.equals("T")) {
+            aux = T;//20
+        }
+        if (letter.equals("U")) {
+            aux = U;//21
+        }
+        if (letter.equals("V")) {
+            aux = V;//22
+        }
+        if (letter.equals("W")) {
+            aux = W;//23
+        }
+        if (letter.equals("X")) {
+            aux = X;//24
+        }
+        if (letter.equals("Y")) {
+            aux = Y;//25
+        }
+        if (letter.equals("Z")) {
+            aux = Z;//26
         }
         return aux;
     }
@@ -689,6 +764,7 @@ public class Practica1 {
 
             if (multiplicacionmatriz(m1, inversa, m4)) {
                 imprimir_m(m4);
+                 R = m4;
             }
             reporte(m1, m2);
         } catch (Exception e) {
