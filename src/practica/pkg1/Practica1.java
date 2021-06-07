@@ -18,37 +18,37 @@ public class Practica1 {
       el uso que se le da en el metodo switch_m
       el cual por cierto es muy primitivo y propiamente de principiantes
      */
-    static int[][] A; //1
-    static int[][] B; //2
-    static int[][] C; //3
-    static int[][] D; //4
-    static int[][] E; //5
-    static int[][] F; //6
-    static int[][] G; //7
-    static int[][] H; //8
-    static int[][] I; //9
-    static int[][] J; //10
-    static int[][] K; //11
-    static int[][] L; //12
-    static int[][] M; //13
-    static int[][] N; //14
-    static int[][] O; //15
-    static int[][] P; //16
-    static int[][] Q; //17
-    static int[][] S; //18
-    static int[][] T; //19
-    static int[][] U; //20
-    static int[][] V; //21
-    static int[][] W; //22
-    static int[][] X; //23
-    static int[][] Y; //24
-    static int[][] Z; //25
+    static double[][] A; //1
+    static double[][] B; //2
+    static double[][] C; //3
+    static double[][] D; //4
+    static double[][] E; //5
+    static double[][] F; //6
+    static double[][] G; //7
+    static double[][] H; //8
+    static double[][] I; //9
+    static double[][] J; //10
+    static double[][] K; //11
+    static double[][] L; //12
+    static double[][] M; //13
+    static double[][] N; //14
+    static double[][] O; //15
+    static double[][] P; //16
+    static double[][] Q; //17
+    static double[][] S; //18
+    static double[][] T; //19
+    static double[][] U; //20
+    static double[][] V; //21
+    static double[][] W; //22
+    static double[][] X; //23
+    static double[][] Y; //24
+    static double[][] Z; //25
     
 
     //Decidí volver el escaner global, espero que no sea una mala idea
     //Los metodos que lo utilizaban de local eran switch_m, sub_menu y main
     static Scanner sc = new Scanner(System.in);
-    static int[][] R; // 26
+    static double[][] R; // 26
     /*
     Este sí que sera un 'espaguetti code', la vdd
     Metodos como switch_m son redundantes y bastante tediosos de programar,
@@ -83,9 +83,9 @@ public class Practica1 {
                         break;
                     case 2:
                         System.out.println("Nombre de la primer matriz:");
-                        int[][] m10 = switch_m();
+                        double[][] m10 = switch_m();
                         System.out.println("Nombre de la segunda matriz:");
-                        int[][] m20 = switch_m();
+                        double[][] m20 = switch_m();
                         //int[][] resultado_suma;
                         try {
                             R = suma_m(m10, m20);
@@ -100,9 +100,9 @@ public class Practica1 {
                         break;
                     case 3:
                         System.out.println("Nombre de la primer matriz:");
-                        int[][] m11 = switch_m();
+                        double[][] m11 = switch_m();
                         System.out.println("Nombre de la segunda matriz:");
-                        int[][] m21 = switch_m();
+                        double[][] m21 = switch_m();
                         //int[][] resultado_resta;
                         try {
                             R = resta_m(m11, m21);
@@ -128,7 +128,7 @@ public class Practica1 {
                         }
                         break;
                     case 6:
-                        int[][] original;
+                        double[][] original;
                         System.out.println("Nombre de la Matriz:");
                         original = switch_m();
                         R = Traspuesta(original);
@@ -138,7 +138,7 @@ public class Practica1 {
                         System.out.println("==================");
                         break;
                     case 7:
-                        int[][] inversa;
+                        double[][] inversa;
                         System.err.print("Nombre de la Matriz:");
                         inversa = switch_m();
                         try{
@@ -155,7 +155,7 @@ public class Practica1 {
                     case 8:
 
                         Scanner entrada = new Scanner(System.in);
-                        int[][] m1 = {
+                        double[][] m1 = {
                                 {1, 1},
                                 {1, 1}
                         };
@@ -169,9 +169,9 @@ public class Practica1 {
                                 //Inicializacion unica del valalor m2=m1 para que la vuelta 2 del ciclo m2 se matenga estatica con la ayuda de valor auxiliar
                                 int filas = m1.length;
                                 int columnas = m1[0].length;
-                                int[][] aux = new int[m1.length][m1[0].length];
+                                double[][] aux = new double[m1.length][m1[0].length];
                                 if (filas == columnas){
-                                    int[][] m2 = new int[filas][columnas];
+                                    double[][] m2 = new double[filas][columnas];
                                     for (int i = 0; i < m1.length; i++) {
                                         for (int j = 0; j < m1[0].length; j++) {
                                             m2[i][j] = m1[i][j];
@@ -187,7 +187,7 @@ public class Practica1 {
                                                 }
                                             }
                                             //Lugar en donde se almacena el resultado
-                                            int[][] producto = new int[m1.length][m2[0].length];
+                                            double[][] producto = new double[m1.length][m2[0].length];
                                             // Realizamos esto por cada columna de la  matriz m2
                                             for (int a = 0; a < m2[0].length; a++) {
                                                 // Dentro recorremos las filas de la matriz m1
@@ -242,10 +242,10 @@ public class Practica1 {
                     case 9:
                         //Aquí no se puedeo usar la matriz 'R' por que la 
                         //determinate es un entero
-                        int[][] m19;
+                        double[][] m19;
                         System.err.print("Nombre de la Matriz:");
                         m19 = switch_m();
-                        int determinante;
+                        double determinante;
                         try {
                             determinante = Det(m19);
                             System.err.print("LA DETERMINANTE ES:" +"[ " + determinante + "]");
@@ -275,7 +275,7 @@ public class Practica1 {
         String[] contenidoFila;
         String[] filaMatriz;
         String[] columnasMatriz;
-        int[][] matrixAux = null;
+        double[][] matrixAux = null;
 
         try {
 
@@ -300,7 +300,7 @@ public class Practica1 {
 
                     columnasMatriz = filaMatriz[j].split(",");
 
-                    matrixAux = new int[filaMatriz.length][columnasMatriz.length];
+                    matrixAux = new double[filaMatriz.length][columnasMatriz.length];
 
                         for (int k = 0; k < columnasMatriz.length; k++) {
 
@@ -412,9 +412,9 @@ public class Practica1 {
     }
 
     //No comment
-    static int[][] suma_m(int[][] m1, int[][] m2) throws Exception {
-        int[][] aux; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
-        aux = new int[m1.length][m1[0].length];
+    static double[][] suma_m(double[][] m1, double[][] m2) throws Exception {
+        double[][] aux; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
+        aux = new double[m1.length][m1[0].length];
         if ((m1.length == m2.length) && (m1[0].length == m2[0].length)) {
             //'for' doble anidado para la suma 
             for (int i = 0; i < m1.length; i++) {
@@ -430,9 +430,9 @@ public class Practica1 {
     }
 
     //Exactamente la misma operación de suma
-    static int[][] resta_m(int[][] m1, int[][] m2) throws Exception {
-        int[][] aux; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
-        aux = new int[m1.length][m1[0].length];
+    static double[][] resta_m(double[][] m1, double[][] m2) throws Exception {
+        double[][] aux; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
+        aux = new double[m1.length][m1[0].length];
         if ((m1.length == m2.length) && (m1[0].length == m2[0].length)) {
             //'for' doble anidado para la suma 
             for (int i = 0; i < m2.length; i++) {
@@ -452,7 +452,7 @@ public class Practica1 {
         
         boolean menu = true;
         int op;
-        while (menu = true) {
+        do{
             System.out.println("***Multiplicación***");
             try {
                 System.out.println("1)Producto de un escalar y una matriz" + "\n2)Producto de 2 matrices" + "\n3)Volver");
@@ -464,22 +464,22 @@ public class Practica1 {
                         break;
                     case 2:
                         System.out.println("Nombre de la primer matriz:");
-                        int[][] m1 = switch_m();
+                        double[][] m1 = switch_m();
                         System.out.println("Nombre de la segunda matriz:");
-                        int[][] m2 = switch_m();
+                        double[][] m2 = switch_m();
 
                         /* Numero de Filas de la primera Matriz */
                         int filas = m1.length;
                         /* Numero de Columnas de la segunda Matriz */
                         int columnas = m2[0].length;
 
-                        int[][] m3 = new int[filas][columnas];
+                        double[][] m3 = new double[filas][columnas];
 
                         /*Evaluacion de las dos matrices de lectura*/
                         if(multiplicacionmatriz(m1,m2,m3)){
-                            mostrarmatriz(m3);
+                            imprimir_m(m3);
                             reporte(m1, m2);
-                        }else{
+                        } else {
                             /*Si no se cumple con la condicion
                              */
                             System.out.println("Matrices no compatibles");
@@ -487,7 +487,7 @@ public class Practica1 {
 
                         break;
                     case 3:
-                        System.exit(0);
+                        menu = false;
                         break;
                     default:
                         System.out.println("Seleccione una opción valida");
@@ -495,19 +495,19 @@ public class Practica1 {
             } catch (Exception e) {
                 System.out.println("...Introduzca una entrada valida");
             }
-        }
+        } while (menu = true);
     }
 
     //Multiplicación de una matriz por escalar
-    static int[][] multiplicacion() throws Exception {
-        int[][] aux;
-        int[][] res_aux;
+    static double[][] multiplicacion() throws Exception {
+        double[][] aux;
+        double[][] res_aux;
         int num;
         System.out.println("Introduzca el escalar:");
         num = sc.nextInt();
         System.out.println("Nombre de la matriz:");
         aux = switch_m();
-        res_aux = new int[aux.length][aux[0].length];
+        res_aux = new double[aux.length][aux[0].length];
         //Debo checar este for
         for (int i = 0; i < res_aux.length; i++) {
             for (int j = 0; j < res_aux[0].length; j++) {
@@ -519,7 +519,7 @@ public class Practica1 {
     }
 
     //Producto de dos matrices
-    public static boolean multiplicacionmatriz(int[][] m1, int[][] m2, int[][] m3){
+    public static boolean multiplicacionmatriz(double[][] m1, double[][] m2, double[][] m3){
         boolean compatible=true;
         if (m1[0].length != m2.length){
             compatible = false;
@@ -534,22 +534,12 @@ public class Practica1 {
         }
         return compatible;
     }
-    //Muestreo de la multiplicacion de 2 matrices
-    public static void mostrarmatriz(int[][] m){
-        System.out.println("La matriz resultante es: ");
-        for (int i=0; i<m.length;i++){
-            for (int j=0;j<m[i].length;j++){
-                System.out.print(m[i][j]+" ");
-            }
-            System.out.println();
-        }
-    }
 
     //Debo encontrar una solución más elegante para este proceso
-    static int[][] switch_m() {
+    static double[][] switch_m() {
         //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
         String letter = sc.next();
-        int[][] aux = null;
+        double[][] aux = null;
         if (letter.equals("A")) {
             aux = A;
             //1
@@ -641,20 +631,20 @@ public class Practica1 {
     }
 
     //Método exclusivo para la impresión de las matrices
-    static int[][] imprimir_m(int[][] res) {
-        int[][] aux = res; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
-        for (int[] aux1 : aux) {
+    static double[][] imprimir_m(double[][] res) {
+        double[][] aux = res; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
+        for (double[] aux1 : aux) {
             for (int j = 0; j < aux[0].length; j++) {
-                System.err.print("[ " + aux1[j] + "]");
+                System.out.print("[ " + aux1[j] + "]");
             }
-            System.err.println("");
+            System.out.println("");
         }
         return aux;
     }
 
-    private static int[][] Traspuesta(int[][] original) {
-        int[][] aux;//El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
-        aux = new int[original[0].length][original.length];
+    private static double[][] Traspuesta(double[][] original) {
+        double[][] aux;//El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
+        aux = new double[original[0].length][original.length];
         for (int i = 0; i < original.length; i++) {
             for (int j = 0; j < original[0].length; j++) {
                 aux[j][i] = original[i][j];
@@ -666,8 +656,8 @@ public class Practica1 {
         return aux;
     }
 
-    private static int Det(int[][] m19) throws Exception {
-    int aux_det = 0;
+    private static double Det(double[][] m19) throws Exception {
+    double aux_det = 0;
     System.err.println("DE LA MATRIZ");
     imprimir_m(m19);
         if(m19.length == m19[0].length){
@@ -676,8 +666,8 @@ public class Practica1 {
                 aux_det = m19[0][0] * m19[1][1] - m19[0][1] * m19[1][0];
             }
             if (m19.length == 3) {
-                int left = m19[0][0] * m19[1][1] * m19[2][2] - m19[1][0] * m19[2][1] * m19[0][2] + m19[2][0] * m19[0][1] * m19[1][2];
-                int right = m19[0][2] * m19[1][1] * m19[2][0] - m19[1][2] * m19[2][1] * m19[0][0] + m19[2][2] * m19[0][1] * m19[1][0];
+                double left = m19[0][0] * m19[1][1] * m19[2][2] - m19[1][0] * m19[2][1] * m19[0][2] + m19[2][0] * m19[0][1] * m19[1][2];
+                double right = m19[0][2] * m19[1][1] * m19[2][0] - m19[1][2] * m19[2][1] * m19[0][0] + m19[2][2] * m19[0][1] * m19[1][0];
                 aux_det = left - right;
             }
             if (m19.length > 3) {
@@ -695,13 +685,13 @@ public class Practica1 {
     crearlos en los métodos, al fin y al cabo, el metodo que se invoca no es afectado 
     por ello
     */
-    private static int[][] Inversa(int[][] aux) throws Exception {
-        int[][] inv;
+    private static double[][] Inversa(double[][] aux) throws Exception {
+        double[][] inv;
         if (aux[0].length == aux.length) {
-            int det;
+            double det;
             det = Det(aux);
-            int[][] trans;
-            int[][] adj;
+            double[][] trans;
+            double[][] adj;
             trans = Traspuesta(aux);
             adj = Adjunta(trans);
             /*System.out.println(det);
@@ -709,7 +699,7 @@ public class Practica1 {
             imprimir_m(adj);
             Está parte solo era para garantizar que todo estuviera en orden
             */
-            inv = new int[adj.length][adj[0].length];
+            inv = new double[adj.length][adj[0].length];
             for (int i = 0; i < adj.length; i++) {
                 for (int j = 0; j < adj[0].length; j++) {
                     inv[i][j]= adj[i][j]/det;
@@ -723,9 +713,9 @@ public class Practica1 {
 
     }
 
-    static int[][] Adjunta(int[][] adj) throws Exception {
-        int[][] aux;
-        aux = new int[adj.length][adj[0].length];
+    static double[][] Adjunta(double[][] adj) throws Exception {
+        double[][] aux;
+        aux = new double[adj.length][adj[0].length];
         if (adj.length == 2) {
             //int tl = adj[1][1];
             //int br = adj[0][0];
@@ -755,12 +745,12 @@ public class Practica1 {
 
     public static void division() throws Exception {
         System.out.println("Primera matriz: ");
-        int[][] m1 = switch_m();
+        double[][] m1 = switch_m();
         System.out.println("Segunda matriz: ");
-        int[][] m2 = switch_m();
+        double[][] m2 = switch_m();
         try {
-            int[][] inversa = Inversa(m2);
-            int[][] m4 = new int[m1.length][m2[0].length];
+            double[][] inversa = Inversa(m2);
+            double[][] m4 = new double[m1.length][m2[0].length];
 
             if (multiplicacionmatriz(m1, inversa, m4)) {
                 imprimir_m(m4);
@@ -774,7 +764,7 @@ public class Practica1 {
     }
 
     //Los reportes se basan en el mismo sistema, sistema sencillo para escribir un archivo html
-    public static void reporte(int[][] uno, int[][] dos){
+    public static void reporte(double[][] uno, double[][] dos){
 
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -970,7 +960,7 @@ public class Practica1 {
 
     }
 
-    public static void reporteInversa(int[][] uno){
+    public static void reporteInversa(double[][] uno){
 
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -1098,7 +1088,7 @@ public class Practica1 {
 
     }
 
-    public static void reporteDeterminante(int det, int[][] matrix){
+    public static void reporteDeterminante(double det, double[][] matrix){
 
         FileWriter fichero = null;
         PrintWriter pw = null;
