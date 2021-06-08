@@ -627,6 +627,21 @@ public class Practica1 {
         if (letter.equals("Z")) {
             aux = Z;//26
         }
+        if (letter.equals("Test0")) {
+
+        }
+        if (letter.equals("Test1")) {
+
+        }
+        if (letter.equals("Test2")) {
+
+        }
+        if (letter.equals("Test3")) {
+
+        }
+        if (letter.equals("Test5")) {
+
+        }
         return aux;
     }
 
