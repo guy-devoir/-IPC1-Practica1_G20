@@ -265,123 +265,119 @@ public class Practica1 {
     private static void leerArchivo() {
 
         //variables auxiliar para la lectura del archivo
-        String nombreMatriz;
-        String[] lineas;
-        String[] filaMatriz;
-        String[] columnasMatriz;
         int[][] matrixAux;
-        String contenido;
 
         try {
             System.out.println("Ingrese el nombre del archivo: ");
-            contenido = getContentOfFile(sc.next());
-            lineas = contenido.split("\n");
+            String contenido = getContentOfFile(sc.next());
+            String[] lineas = contenido.split("\n");
 
             //Aquí empieza el algoritmo para saber el nombre de mi matriz y llenar la matriz correspondiente
             for (int i = 0; i < lineas.length; i++) {
                     String[] contenidoFila = lineas[i].split(":");
-                    nombreMatriz = contenidoFila[0].trim();
+                    String nombreMatriz = contenidoFila[0].trim();
                     //separamos el contenido del nombre
-                    filaMatriz = contenidoFila[1].trim().split(";"); //Aquí ya tenemos las filas de mi matriz
+                    String[] filaMatriz = contenidoFila[1].trim().split(";"); //Aquí ya tenemos las filas de mi matriz
+
+
 
                     int cantidadColumnas = filaMatriz[0].split(",").length;
                     matrixAux = new int[filaMatriz.length][cantidadColumnas];
 
                     for (int j = 0; j < filaMatriz.length; j++) {
 
-                        columnasMatriz = filaMatriz[j].trim().split(",");
+                        String[] columnasMatriz = filaMatriz[j].trim().split(",");
+
 
                         for (int k = 0; k < columnasMatriz.length; k++) {
-
-                                matrixAux[j][k] = Integer.valueOf(columnasMatriz[k]);
-
+                                String aux = columnasMatriz[k].trim();
+                                matrixAux[j][k] = Integer.parseInt(aux);
                         }
 
                     }
 
-
-                    //Ya que tenemos la matriz cargada y pasando las excepciones la guardamos en su respectivo lugar
-                   if (nombreMatriz.equals("A")) {
-                        A = matrixAux;
-                    }
-                    if (nombreMatriz.equals("B")) {
-                        B = matrixAux;
-                    }
-                    if (nombreMatriz.equals("C")) {
-                        C = matrixAux;
-                    }
-                    if (nombreMatriz.equals("D")) {
-                        D = matrixAux;
-                    }
-                    if (nombreMatriz.equals("E")) {
-                        E = matrixAux;
-                    }
-                    if (nombreMatriz.equals("F")) {
-                        F = matrixAux;
-                    }
-                    if (nombreMatriz.equals("G")) {
-                        G = matrixAux;
-                    }
-                    if (nombreMatriz.equals("H")) {
-                        H = matrixAux;
-                    }
-                    if (nombreMatriz.equals("I")) {
-                        I = matrixAux;
-                    }
-                    if (nombreMatriz.equals("J")) {
-                        J = matrixAux;
-                    }
-                    if (nombreMatriz.equals("K")) {
-                        K = matrixAux;
-                    }
-                    if (nombreMatriz.equals("L")) {
-                        L = matrixAux;
-                    }
-                    if (nombreMatriz.equals("M")) {
-                        M = matrixAux;
-                    }
-                    if (nombreMatriz.equals("N")) {
-                        N = matrixAux;
-                    }
-                    if (nombreMatriz.equals("O")) {
-                        O = matrixAux;
-                    }
-                    if (nombreMatriz.equals("P")) {
-                        P = matrixAux;
-                    }
-                    if (nombreMatriz.equals("Q")) {
-                        Q = matrixAux;
-                    }
-                    if (nombreMatriz.equals("S")) {
-                        S = matrixAux;
-                    }
-                    if (nombreMatriz.equals("T")) {
-                        T = matrixAux;
-                    }
-                    if (nombreMatriz.equals("U")) {
-                        U = matrixAux;
-                    }
-                    if (nombreMatriz.equals("V")) {
-                        V = matrixAux;
-                    }
-                    if (nombreMatriz.equals("W")) {
-                        W = matrixAux;
-                    }
-                    if (nombreMatriz.equals("X")) {
-                        X = matrixAux;
-                    }
-                    if (nombreMatriz.equals("Y")) {
-                        Y = matrixAux;
-                    }
-                    if (nombreMatriz.equals("Z")) {
-                        Z = matrixAux;
-                    }
-                    if (nombreMatriz.equals("R")) {
-                        R = matrixAux;
-                    }
+                   if(matrixAux != null) {
+                       //Ya que tenemos la matriz cargada y pasando las excepciones la guardamos en su respectivo lugar
+                       if (nombreMatriz.equals("A")) {
+                           A = matrixAux;
+                       }
+                       if (nombreMatriz.equals("B")) {
+                           B = matrixAux;
+                       }
+                       if (nombreMatriz.equals("C")) {
+                           C = matrixAux;
+                       }
+                       if (nombreMatriz.equals("D")) {
+                           D = matrixAux;
+                       }
+                       if (nombreMatriz.equals("E")) {
+                           E = matrixAux;
+                       }
+                       if (nombreMatriz.equals("F")) {
+                           F = matrixAux;
+                       }
+                       if (nombreMatriz.equals("G")) {
+                           G = matrixAux;
+                       }
+                       if (nombreMatriz.equals("H")) {
+                           H = matrixAux;
+                       }
+                       if (nombreMatriz.equals("I")) {
+                           I = matrixAux;
+                       }
+                       if (nombreMatriz.equals("J")) {
+                           J = matrixAux;
+                       }
+                       if (nombreMatriz.equals("K")) {
+                           K = matrixAux;
+                       }
+                       if (nombreMatriz.equals("L")) {
+                           L = matrixAux;
+                       }
+                       if (nombreMatriz.equals("M")) {
+                           M = matrixAux;
+                       }
+                       if (nombreMatriz.equals("N")) {
+                           N = matrixAux;
+                       }
+                       if (nombreMatriz.equals("O")) {
+                           O = matrixAux;
+                       }
+                       if (nombreMatriz.equals("P")) {
+                           P = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Q")) {
+                           Q = matrixAux;
+                       }
+                       if (nombreMatriz.equals("S")) {
+                           S = matrixAux;
+                       }
+                       if (nombreMatriz.equals("T")) {
+                           T = matrixAux;
+                       }
+                       if (nombreMatriz.equals("U")) {
+                           U = matrixAux;
+                       }
+                       if (nombreMatriz.equals("V")) {
+                           V = matrixAux;
+                       }
+                       if (nombreMatriz.equals("W")) {
+                           W = matrixAux;
+                       }
+                       if (nombreMatriz.equals("X")) {
+                           X = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Y")) {
+                           Y = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Z")) {
+                           Z = matrixAux;
+                       }
+                       if (nombreMatriz.equals("R")) {
+                           R = matrixAux;
+                       }
+                   }
                 }
-
-
 
        }
         catch (Exception e){
