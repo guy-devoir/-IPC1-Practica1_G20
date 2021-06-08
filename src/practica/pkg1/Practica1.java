@@ -1,9 +1,7 @@
 package practica.pkg1;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * @author Luciano Xiquín
@@ -47,7 +45,7 @@ public class Practica1 {
 
     //Decidí volver el escaner global, espero que no sea una mala idea
     //Los metodos que lo utilizaban de local eran switch_m, sub_menu y main
-    static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
     static int[][] R; // 26
     /*
     Este sí que sera un 'espaguetti code', la vdd
@@ -78,8 +76,7 @@ public class Practica1 {
                 int opcion;
                 switch (opcion = sc.nextInt()) {
                     case 1:
-                        System.out.println("****************" + "\nIntroduzca la ruta del archivo");
-                        leerArchivo();
+                            leerArchivo();
                         break;
                     case 2:
                         System.out.println("Nombre de la primer matriz:");
@@ -271,139 +268,121 @@ public class Practica1 {
     private static void leerArchivo() {
 
         //variables auxiliar para la lectura del archivo
-        String nombreMatriz;
-        String[] contenidoFila;
-        String[] filaMatriz;
-        String[] columnasMatriz;
-        int[][] matrixAux = null;
+        int[][] matrixAux;
 
         try {
-
-            File archivo = new File(sc.nextLine());
-            String linea = "";
-            sc.nextLine();//Escanea la primera linea de mi archivo
-
-            while(sc.hasNextLine()){
-
-                linea += sc.hasNextLine() + "\n";
-
-            }
+            System.out.println("Ingrese el nombre del archivo: ");
+            String contenido = getContentOfFile(sc.next());
+            String[] lineas = contenido.split("\n");
 
             //Aquí empieza el algoritmo para saber el nombre de mi matriz y llenar la matriz correspondiente
-            for (int i = 0; i < 26; i++) {
+            for (int i = 0; i < lineas.length; i++) {
+                    String[] contenidoFila = lineas[i].split(":");
+                    String nombreMatriz = contenidoFila[0].trim();
+                    //separamos el contenido del nombre
+                    String[] filaMatriz = contenidoFila[1].trim().split(";"); //Aquí ya tenemos las filas de mi matriz
 
-                contenidoFila = linea.split(":");
-                nombreMatriz = contenidoFila[0].trim();
-                //separamos el contenido del nombre
-                filaMatriz = contenidoFila[1].split(";"); //Aquí ya tenemos las filas de mi matriz
-                for (int j = 0; j < filaMatriz.length; j++) {
 
-                    columnasMatriz = filaMatriz[j].split(",");
 
-                    matrixAux = new int[filaMatriz.length][columnasMatriz.length];
+                    int cantidadColumnas = filaMatriz[0].split(",").length;
+                    matrixAux = new int[filaMatriz.length][cantidadColumnas];
+
+                    for (int j = 0; j < filaMatriz.length; j++) {
+
+                        String[] columnasMatriz = filaMatriz[j].trim().split(",");
+
 
                         for (int k = 0; k < columnasMatriz.length; k++) {
-
-                            if(filaMatriz[0].length() == filaMatriz[j].length()){
-
-                                matrixAux[j][k] = Integer.parseInt(columnasMatriz[k]);
-
-                            }
-                            else{
-                                System.out.println("Se omitio la matriz");
-                                i-=1;
-                                break;
-                            }
-
+                                String aux = columnasMatriz[k].trim();
+                                matrixAux[j][k] = Integer.parseInt(aux);
                         }
 
+                    }
+
+                   if(matrixAux != null) {
+                       //Ya que tenemos la matriz cargada y pasando las excepciones la guardamos en su respectivo lugar
+                       if (nombreMatriz.equals("A")) {
+                           A = matrixAux;
+                       }
+                       if (nombreMatriz.equals("B")) {
+                           B = matrixAux;
+                       }
+                       if (nombreMatriz.equals("C")) {
+                           C = matrixAux;
+                       }
+                       if (nombreMatriz.equals("D")) {
+                           D = matrixAux;
+                       }
+                       if (nombreMatriz.equals("E")) {
+                           E = matrixAux;
+                       }
+                       if (nombreMatriz.equals("F")) {
+                           F = matrixAux;
+                       }
+                       if (nombreMatriz.equals("G")) {
+                           G = matrixAux;
+                       }
+                       if (nombreMatriz.equals("H")) {
+                           H = matrixAux;
+                       }
+                       if (nombreMatriz.equals("I")) {
+                           I = matrixAux;
+                       }
+                       if (nombreMatriz.equals("J")) {
+                           J = matrixAux;
+                       }
+                       if (nombreMatriz.equals("K")) {
+                           K = matrixAux;
+                       }
+                       if (nombreMatriz.equals("L")) {
+                           L = matrixAux;
+                       }
+                       if (nombreMatriz.equals("M")) {
+                           M = matrixAux;
+                       }
+                       if (nombreMatriz.equals("N")) {
+                           N = matrixAux;
+                       }
+                       if (nombreMatriz.equals("O")) {
+                           O = matrixAux;
+                       }
+                       if (nombreMatriz.equals("P")) {
+                           P = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Q")) {
+                           Q = matrixAux;
+                       }
+                       if (nombreMatriz.equals("S")) {
+                           S = matrixAux;
+                       }
+                       if (nombreMatriz.equals("T")) {
+                           T = matrixAux;
+                       }
+                       if (nombreMatriz.equals("U")) {
+                           U = matrixAux;
+                       }
+                       if (nombreMatriz.equals("V")) {
+                           V = matrixAux;
+                       }
+                       if (nombreMatriz.equals("W")) {
+                           W = matrixAux;
+                       }
+                       if (nombreMatriz.equals("X")) {
+                           X = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Y")) {
+                           Y = matrixAux;
+                       }
+                       if (nombreMatriz.equals("Z")) {
+                           Z = matrixAux;
+                       }
+                       if (nombreMatriz.equals("R")) {
+                           R = matrixAux;
+                       }
+                   }
                 }
 
-                //Ya que tenemos la matriz cargada y pasando las excepciones la guardamos en su respectivo lugar
-                if(nombreMatriz.equals("A") && matrixAux != null){
-                    A = matrixAux;
-                }
-                if(nombreMatriz.equals("B") && matrixAux != null){
-                    B = matrixAux;
-                }
-                if(nombreMatriz.equals("C") && matrixAux != null){
-                    C = matrixAux;
-                }
-                if(nombreMatriz.equals("D") && matrixAux != null){
-                    D = matrixAux;
-                }
-                if(nombreMatriz.equals("E") && matrixAux != null){
-                    E = matrixAux;
-                }
-                if(nombreMatriz.equals("F") && matrixAux != null){
-                    F = matrixAux;
-                }
-                if(nombreMatriz.equals("G") && matrixAux != null){
-                    G = matrixAux;
-                }
-                if(nombreMatriz.equals("H") && matrixAux != null){
-                    H = matrixAux;
-                }
-                if(nombreMatriz.equals("I") && matrixAux != null){
-                    I = matrixAux;
-                }
-                if(nombreMatriz.equals("J") && matrixAux != null){
-                    J =  matrixAux;
-                }
-                if(nombreMatriz.equals("K") && matrixAux != null){
-                    K = matrixAux;
-                }
-                if(nombreMatriz.equals("L") && matrixAux != null){
-                    L = matrixAux;
-                }
-                if(nombreMatriz.equals("M") && matrixAux != null){
-                    M = matrixAux;
-                }
-                if(nombreMatriz.equals("N") && matrixAux != null){
-                    N = matrixAux;
-                }
-                if(nombreMatriz.equals("O") && matrixAux != null){
-                    O = matrixAux;
-                }
-                if(nombreMatriz.equals("P") && matrixAux != null){
-                    P = matrixAux;
-                }
-                if(nombreMatriz.equals("Q") && matrixAux != null){
-                    Q = matrixAux;
-                }
-                if(nombreMatriz.equals("S") && matrixAux != null){
-                    S = matrixAux;
-                }
-                if(nombreMatriz.equals("T") && matrixAux != null){
-                    T = matrixAux;
-                }
-                if(nombreMatriz.equals("U") && matrixAux != null){
-                    U = matrixAux;
-                }
-                if(nombreMatriz.equals("V") && matrixAux != null){
-                    V = matrixAux;
-                }
-                if(nombreMatriz.equals("W") && matrixAux != null){
-                    W = matrixAux;
-                }
-                if(nombreMatriz.equals("X")){
-                    X = matrixAux;
-                }
-                if(nombreMatriz.equals("Y")){
-                    Y = matrixAux;
-                }
-                if(nombreMatriz.equals("Z")){
-                    Z = matrixAux;
-                }
-                if(nombreMatriz.equals("R") && matrixAux != null){
-                    R = matrixAux;
-                }
-
-            }
-
-            sc.close();
-
-        }
+       }
         catch (Exception e){
             System.out.println("No se pudo leer el archivo");
             System.out.println(e.getLocalizedMessage());
@@ -411,6 +390,40 @@ public class Practica1 {
 
     }
 
+    public static String getContentOfFile(String pathname) {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+            archivo = new File(pathname);
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            // Lectura del fichero
+            String content = "";
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                content += linea + "\n";
+            }
+            return content;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta
+            // una excepcion.
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return "";
+    }
     //No comment
     static int[][] suma_m(int[][] m1, int[][] m2) throws Exception {
         int[][] aux; //El arreglo auxiliar está solo para alamacenar matrices y regresar un valor
@@ -1154,5 +1167,6 @@ public class Practica1 {
         }
 
     }
+
 
 }
